@@ -1,0 +1,99 @@
+AI Engineer Interview Preparation
+
+Python
+
+-   OOP, decorators, generators, context managers
+-   async/await, typing, exceptions
+-   Time complexity of common operations
+
+Data Structures & Algorithms
+
+-   Arrays, hash maps, stacks, queues
+-   Trees, graphs, heaps
+-   BFS, DFS, binary search
+-   Dynamic programming basics
+
+SQL
+
+-   JOINs, GROUP BY, HAVING
+-   Window functions
+-   Indexes and normalization
+
+Machine Learning
+
+-   Supervised vs unsupervised learning
+-   Overfitting, regularization
+-   Precision, Recall, F1, ROC-AUC
+-   Cross-validation
+
+LLMs
+
+-   Transformer architecture
+-   Attention mechanism
+-   Tokens, embeddings, context window
+-   Temperature, top-p, hallucinations
+
+RAG
+
+-   Chunking strategies
+-   Embeddings
+-   Vector databases
+-   Metadata and reranking
+
+AI Agents
+
+-   Tool calling
+-   Memory
+-   Planning
+-   Multi-agent workflows
+
+Vector Databases
+
+-   FAISS
+-   ChromaDB
+-   Pinecone
+-   Qdrant
+-   Cosine similarity
+
+APIs & Backend
+
+-   REST APIs
+-   FastAPI
+-   Authentication (JWT/OAuth)
+-   Error handling
+
+Deployment
+
+-   Docker
+-   CI/CD
+-   Linux basics
+-   Cloud deployment
+
+LLMOps
+
+-   Prompt versioning
+-   Tracing
+-   Evaluation
+-   Token cost optimization
+
+Behavioral Questions
+
+-   Tell me about yourself.
+-   Describe a challenging AI project.
+-   How do you debug production issues?
+-   Explain a failure and what you learned.
+
+Coding Practice
+
+-   Solve 1-2 DSA problems daily.
+-   Build small AI projects.
+-   Practice API design.
+-   Review Python coding patterns.
+
+Mock Interview Checklist
+
+-   Explain every project end-to-end.
+-   Whiteboard RAG pipeline.
+-   Explain agent architecture.
+-   Optimize latency and cost.
+-   Discuss trade-offs in design decisions.

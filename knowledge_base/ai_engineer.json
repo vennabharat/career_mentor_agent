@@ -1,0 +1,417 @@
+{
+  "career": "AI Engineer",
+  "version": "1.0",
+  "skills": [
+    {
+      "id": "python",
+      "title": "Python Programming",
+      "category": "Programming",
+      "difficulty": "Beginner",
+      "priority": 1,
+      "estimated_weeks": 4,
+      "description": "Python is the primary programming language used for AI development.",
+      "prerequisites": [],
+      "topics": [
+        "Variables",
+        "Data Types",
+        "Functions",
+        "Loops",
+        "Classes",
+        "OOP",
+        "Decorators",
+        "Generators",
+        "Context Managers",
+        "Exception Handling",
+        "Modules",
+        "Virtual Environments",
+        "Typing",
+        "Async Programming"
+      ],
+      "projects": [
+        "CLI Calculator",
+        "Expense Tracker",
+        "Student Management System"
+      ],
+      "resources": [
+        "Python Official Documentation",
+        "Real Python",
+        "Automate the Boring Stuff"
+      ],
+      "interview_topics": [
+        "OOP",
+        "Decorators",
+        "Generators",
+        "Mutable vs Immutable",
+        "GIL",
+        "Asyncio"
+      ]
+    },
+    {
+      "id": "git",
+      "title": "Git & GitHub",
+      "category": "Version Control",
+      "difficulty": "Beginner",
+      "priority": 2,
+      "estimated_weeks": 1,
+      "description": "Version control is essential for collaboration and project management.",
+      "prerequisites": [
+        "python"
+      ],
+      "topics": [
+        "Repositories",
+        "Commit",
+        "Branching",
+        "Merge",
+        "Rebase",
+        "Pull Request",
+        "GitHub Actions"
+      ],
+      "projects": [
+        "Manage an AI project using Git"
+      ],
+      "resources": [
+        "Git Documentation",
+        "GitHub Docs"
+      ],
+      "interview_topics": [
+        "Merge vs Rebase",
+        "Cherry Pick",
+        "Conflict Resolution"
+      ]
+    },
+    {
+      "id": "linux",
+      "title": "Linux",
+      "category": "Operating System",
+      "difficulty": "Beginner",
+      "priority": 3,
+      "estimated_weeks": 2,
+      "description": "Most AI workloads run on Linux servers.",
+      "prerequisites": [],
+      "topics": [
+        "Terminal",
+        "Permissions",
+        "SSH",
+        "Cron",
+        "Process Management",
+        "Networking",
+        "Package Managers"
+      ],
+      "projects": [
+        "Deploy Python application on Linux"
+      ],
+      "resources": [
+        "Linux Journey",
+        "Ubuntu Documentation"
+      ],
+      "interview_topics": [
+        "Permissions",
+        "Process Commands",
+        "SSH"
+      ]
+    },
+    {
+      "id": "sql",
+      "title": "SQL",
+      "category": "Database",
+      "difficulty": "Beginner",
+      "priority": 4,
+      "estimated_weeks": 2,
+      "description": "AI Engineers frequently retrieve and process structured data.",
+      "prerequisites": [],
+      "topics": [
+        "SELECT",
+        "JOIN",
+        "GROUP BY",
+        "Indexes",
+        "Views",
+        "Subqueries",
+        "Transactions"
+      ],
+      "projects": [
+        "Build analytics dashboard backend"
+      ],
+      "resources": [
+        "SQLBolt",
+        "PostgreSQL Docs"
+      ],
+      "interview_topics": [
+        "JOIN Types",
+        "Indexes",
+        "Normalization"
+      ]
+    },
+    {
+      "id": "api",
+      "title": "REST APIs",
+      "category": "Backend",
+      "difficulty": "Intermediate",
+      "priority": 5,
+      "estimated_weeks": 2,
+      "description": "AI applications expose APIs for inference and automation.",
+      "prerequisites": [
+        "python"
+      ],
+      "topics": [
+        "HTTP",
+        "REST",
+        "JSON",
+        "Authentication",
+        "FastAPI",
+        "Swagger"
+      ],
+      "projects": [
+        "Create AI Chat API"
+      ],
+      "resources": [
+        "FastAPI Documentation"
+      ],
+      "interview_topics": [
+        "REST",
+        "Status Codes",
+        "JWT"
+      ]
+    },
+    {
+      "id": "ml",
+      "title": "Machine Learning Fundamentals",
+      "category": "Machine Learning",
+      "difficulty": "Intermediate",
+      "priority": 6,
+      "estimated_weeks": 6,
+      "description": "Understand supervised and unsupervised learning before using LLMs.",
+      "prerequisites": [
+        "python",
+        "sql"
+      ],
+      "topics": [
+        "Regression",
+        "Classification",
+        "Clustering",
+        "Feature Engineering",
+        "Evaluation Metrics",
+        "Cross Validation",
+        "Overfitting"
+      ],
+      "projects": [
+        "House Price Prediction",
+        "Customer Churn Prediction"
+      ],
+      "resources": [
+        "Scikit-Learn",
+        "Hands-On Machine Learning"
+      ],
+      "interview_topics": [
+        "Bias Variance",
+        "Precision Recall",
+        "Cross Validation"
+      ]
+    },
+    {
+      "id": "llm",
+      "title": "Large Language Models",
+      "category": "Generative AI",
+      "difficulty": "Intermediate",
+      "priority": 7,
+      "estimated_weeks": 4,
+      "description": "Understand transformer-based language models and prompting.",
+      "prerequisites": [
+        "python"
+      ],
+      "topics": [
+        "Transformers",
+        "Attention",
+        "Prompt Engineering",
+        "Temperature",
+        "Tokens",
+        "Context Window",
+        "Embeddings"
+      ],
+      "projects": [
+        "Chatbot",
+        "Document QA"
+      ],
+      "resources": [
+        "OpenAI Docs",
+        "Google Gemini Docs",
+        "Hugging Face"
+      ],
+      "interview_topics": [
+        "Transformer",
+        "Attention",
+        "Embeddings",
+        "Prompt Engineering"
+      ]
+    },
+    {
+      "id": "rag",
+      "title": "Retrieval Augmented Generation",
+      "category": "LLM Engineering",
+      "difficulty": "Intermediate",
+      "priority": 8,
+      "estimated_weeks": 3,
+      "description": "Improve LLM responses using external knowledge.",
+      "prerequisites": [
+        "llm"
+      ],
+      "topics": [
+        "Chunking",
+        "Embeddings",
+        "Vector Databases",
+        "Metadata",
+        "Hybrid Search",
+        "Reranking"
+      ],
+      "projects": [
+        "PDF Chat",
+        "Company Knowledge Assistant"
+      ],
+      "resources": [
+        "LangChain",
+        "LlamaIndex"
+      ],
+      "interview_topics": [
+        "Chunking",
+        "Vector Search",
+        "Metadata",
+        "Reranking"
+      ]
+    },
+    {
+      "id": "agents",
+      "title": "AI Agents",
+      "category": "LLM Engineering",
+      "difficulty": "Advanced",
+      "priority": 9,
+      "estimated_weeks": 5,
+      "description": "Build autonomous systems capable of planning and tool usage.",
+      "prerequisites": [
+        "llm",
+        "rag",
+        "api"
+      ],
+      "topics": [
+        "Tool Calling",
+        "Memory",
+        "Planning",
+        "Reflection",
+        "Multi-Agent Systems",
+        "Workflows",
+        "Reasoning"
+      ],
+      "projects": [
+        "AI Travel Agent",
+        "Coding Assistant",
+        "Research Agent"
+      ],
+      "resources": [
+        "LangGraph",
+        "CrewAI",
+        "Google ADK"
+      ],
+      "interview_topics": [
+        "Tool Calling",
+        "Agent Memory",
+        "Planning",
+        "Workflow Design"
+      ]
+    },
+    {
+      "id": "vectordb",
+      "title": "Vector Databases",
+      "category": "Data",
+      "difficulty": "Intermediate",
+      "priority": 10,
+      "estimated_weeks": 2,
+      "description": "Store and retrieve embeddings efficiently.",
+      "prerequisites": [
+        "rag"
+      ],
+      "topics": [
+        "FAISS",
+        "ChromaDB",
+        "Pinecone",
+        "Qdrant",
+        "Similarity Search"
+      ],
+      "projects": [
+        "Semantic Search Engine"
+      ],
+      "resources": [
+        "FAISS Docs",
+        "Qdrant Docs"
+      ],
+      "interview_topics": [
+        "Cosine Similarity",
+        "ANN Search"
+      ]
+    },
+    {
+      "id": "deployment",
+      "title": "Deployment",
+      "category": "DevOps",
+      "difficulty": "Intermediate",
+      "priority": 11,
+      "estimated_weeks": 3,
+      "description": "Deploy AI services to production.",
+      "prerequisites": [
+        "api",
+        "linux"
+      ],
+      "topics": [
+        "Docker",
+        "CI/CD",
+        "Cloud",
+        "Nginx",
+        "Reverse Proxy"
+      ],
+      "projects": [
+        "Deploy AI Chat API"
+      ],
+      "resources": [
+        "Docker Docs",
+        "Render",
+        "Railway"
+      ],
+      "interview_topics": [
+        "Docker",
+        "Containers",
+        "CI/CD"
+      ]
+    },
+    {
+      "id": "monitoring",
+      "title": "LLMOps",
+      "category": "Production AI",
+      "difficulty": "Advanced",
+      "priority": 12,
+      "estimated_weeks": 2,
+      "description": "Monitor AI applications in production.",
+      "prerequisites": [
+        "deployment"
+      ],
+      "topics": [
+        "Prompt Versioning",
+        "Evaluation",
+        "Tracing",
+        "Observability",
+        "Latency",
+        "Token Cost"
+      ],
+      "projects": [
+        "LLM Monitoring Dashboard"
+      ],
+      "resources": [
+        "LangSmith",
+        "Helicone",
+        "Phoenix"
+      ],
+      "interview_topics": [
+        "Tracing",
+        "Evaluation",
+        "Latency",
+        "Cost Optimization"
+      ]
+    }
+  ]
+}
