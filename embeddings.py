@@ -9,11 +9,11 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))  # calling api key fo
 
 # Create embedding from string, returns embedding
 def get_embedding(text: str):
-    embedding = client.models.embed_content(
+    response = client.models.embed_content(
         model="gemini-embedding-2", 
         contents=text
     )
-    return embedding
+    return response.embeddings[0].values
 
 # Create embeddings from documents, return [] embeddings
 def get_embeddings(document):

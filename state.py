@@ -2,7 +2,11 @@ from memory import memory   # importing memory from memory.py
 
 # state for managing tool output
 state = {
-    "Memory":{},
+    "Memory": {},
     "Goal": "",
-    "Skills": []
+    "Skills": [],
+    "MissingSkills": [],
+    "RetrievedDocs": [],
+    "LearningPlan": "",
+    "UserQuestion": ""
 }

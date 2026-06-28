@@ -1,5 +1,5 @@
 # imports tools required for document reading from tools.py
-from tools import (
+from file_loader import (
     load_json, 
     load_pdf, 
     load_txt

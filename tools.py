@@ -1,11 +1,10 @@
 from memory import memory   # importing memory from memory.py
 from state import state     # importing state from state.py
-from pypdf import PdfReader # importing pdf reader for extracting text from pdf files
 from google import genai    # importing genai from google for callin LLM
 from dotenv import load_dotenv  # importing dotenv for loading API key
+from rag import get_relevant_chunks # for fetching relevant chunks using RAG
 
 import os
-import json
 
 load_dotenv()
 
@@ -16,15 +15,13 @@ def remember_user():
     Returns:
         None
     """
-    memory = {
-        "Name": "Bharat", 
-        "Goal": "AI Engineer", 
-        "Skills": ["SQL", "Python"]
-    }
+    memory["Name"] = "Bharat"
+    memory["Goal"] = "AI Engineer"
+    memory["Skills"] = ["SQL", "Python"]
     return "user saved to memory"
 
 # tool for fetching user details to state
-def recall_user():
+def recall_user(state):
     """fetches data from memory and update state 
 
     Returns:
@@ -34,6 +31,30 @@ def recall_user():
     state["Memory"] = memory
     state["Goal"] = memory.get("Goal")
     state["Skills"] = memory.get("Skills", [])
+    
+    return state
+
+def find_missing_skills(state):
+    required_skills = [
+        "Python",
+        "FastAPI",
+        "ChromaDB",
+        "Memory",
+        "RAG",
+        "Docker"
+    ]
+    missing = []
+    for skill in required_skills:
+        if skill not in state["Skills"]:
+            missing.append(skill)
+    state["MissingSkills"] = missing
+    
+    return state
+
+def retrieve_documents(state):
+    chunks = get_relevant_chunks(state["UserQuestion"])
+
+    state["RetrievedDocs"] = chunks
     
     return state
 
@@ -58,7 +79,7 @@ def placement_support(state):
     
     return response.text
     
-def tool_selection():
+def tool_router():
     """LLM funtion calling
 
     Returns:
@@ -80,28 +101,3 @@ def tool_selection():
         tools: {tools}
         """
     )
-    
-# for reading txt file
-def load_txt(file_path):
-    with open(file_path) as file:
-        data = file.read()
-    
-    return data
-
-# for reading pdf file
-def load_pdf(file_path):
-    reader = PdfReader(file_path)
-    
-    text = ""
-    
-    for page in reader.pages:
-        text += page.extract_text() + "\n"
-        
-    return text
-
-# for reading json file
-def load_json(file_path):
-    with open(file_path) as file:
-        data = json.load(file)
-        
-    return json.dumps(data, indent=2)

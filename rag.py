@@ -12,7 +12,7 @@ client = chromadb.PersistentClient(
     path="./chromaDB"
 ) 
 
-collection = client.create_collection(
+collection = client.get_or_create_collection(
     name = "knowledge"
 )
 
@@ -20,7 +20,7 @@ collection = client.create_collection(
 def load_vector_database():
     chunks, metadatas = get_chunks_metadatas()
     ids = [
-        [str(uuid.uuid4())]
+        str(uuid.uuid4())
         for _ in chunks
         ]
     
@@ -41,3 +41,7 @@ def get_relevant_chunks(query):
         include=["documents", "metadatas"]
     )
     return result
+
+
+if collection.count() == 0:
+    load_vector_database()

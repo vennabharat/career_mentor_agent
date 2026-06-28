@@ -1,17 +1,17 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
-from tools import(
-    remember_user, 
-    recall_user
-)
-from rag import (
-    collection, 
-    load_vector_database, 
-    get_chunks_metadatas
-)
+class ChatRequest(BaseModel):
+    question: str
+
+# passing usery query to agent
+from agent import (
+    run_agent, 
+    create_state
+    )
 
 app = FastAPI()
 
-if collection.count() == 0:
-    load_vector_database()
-    
+@app.post("/chat")
+def chat(request: ChatRequest):
+    return run_agent(request.question)
