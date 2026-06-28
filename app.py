@@ -6,8 +6,7 @@ class ChatRequest(BaseModel):
 
 # passing usery query to agent
 from agent import (
-    run_agent, 
-    create_state
+    run_agent
     )
 
 app = FastAPI()

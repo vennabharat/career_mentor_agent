@@ -15,9 +15,9 @@ def remember_user():
     Returns:
         None
     """
-    memory["Name"] = "Bharat"
-    memory["Goal"] = "AI Engineer"
-    memory["Skills"] = ["SQL", "Python"]
+    memory["name"] = "Bharat"
+    memory["goal"] = "AI Engineer"
+    memory["skills"] = ["SQL", "Python"]
     return "user saved to memory"
 
 # tool for fetching user details to state
@@ -28,9 +28,9 @@ def recall_user(state):
         dict: updated state
     """
      
-    state["Memory"] = memory
-    state["Goal"] = memory.get("Goal")
-    state["Skills"] = memory.get("Skills", [])
+    state["memory"] = memory
+    state["goal"] = memory.get("Goal")
+    state["skills"] = memory.get("Skills", [])
     
     return state
 
@@ -47,14 +47,14 @@ def find_missing_skills(state):
     for skill in required_skills:
         if skill not in state["Skills"]:
             missing.append(skill)
-    state["MissingSkills"] = missing
+    state["missing_skills"] = missing
     
     return state
 
 def retrieve_documents(state):
-    chunks = get_relevant_chunks(state["UserQuestion"])
+    chunks = get_relevant_chunks(state["user_question"])
 
-    state["RetrievedDocs"] = chunks
+    state["retrieved_docs"] = chunks
     
     return state
 
@@ -71,20 +71,22 @@ def placement_support(state):
     response = client.models.generate_content(
         model="gemini-2.5-flash", 
         contents=f"""
-        You're a placement mentor. You provide guidence 
+        You're a placement mentor. You provide placement support 
         
         context: {context}
         """
     )
     
     return response.text
-    
+
+"""
+#LLM function calling    
 def tool_router():
-    """LLM funtion calling
+    LLM funtion calling
 
     Returns:
         None: LLM Chooses function to respond
-    """
+    
     tools = [
         remember_user,
         recall_user, 
@@ -95,9 +97,10 @@ def tool_router():
     
     response = client.models.generate_content(
         model="gemini-2.5-flash",
-        contents=f"""
+        contents=f
         Choose from the following tools
         
         tools: {tools}
-        """
+        
     )
+"""

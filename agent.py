@@ -1,5 +1,5 @@
-from state import state
-from memory import memory
+from state import state     # importing state 
+from memory import memory   # importing memory
 
 from tools import (
     recall_user, 
@@ -10,13 +10,13 @@ from tools import (
 
 def create_state():
     return {
-        "Memory": {},
-        "Goal": "",
-        "Skills": [],
-        "MissingSkills": [],
-        "RetrievedDocs": [],
-        "LearningPlan": "",
-        "UserQuestion": ""
+        "memory": {},
+        "goal": "",
+        "skills": [],
+        "missing_skills": [],
+        "retrieved_docs": [],
+        "learning_plan": "",
+        "user_question": ""
     }
 
 def run_agent(question):
@@ -25,7 +25,7 @@ def run_agent(question):
     
     state["memory"] = memory
 
-    state["UserQuestion"] = question
+    state["user_question"] = question
 
     state = recall_user(state)
 
