@@ -45,7 +45,7 @@ def find_missing_skills(state):
     ]
     missing = []
     for skill in required_skills:
-        if skill not in state["Skills"]:
+        if skill not in state["skills"]:
             missing.append(skill)
     state["missing_skills"] = missing
     
