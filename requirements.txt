@@ -6,3 +6,5 @@ dotenv
 pypdf
 chromadb
 sentence-transformers
+transformers
+torch

@@ -2,6 +2,8 @@ from google import genai    # importing genai from google for generating embeddi
 from dotenv import load_dotenv  # importing dotenv for loading API key from .env file
 from sentence_transformers import SentenceTransformer  # for generating embeddings locally
 
+from configuration import embedding_generator
+
 import os 
 
 load_dotenv()
@@ -18,13 +20,15 @@ client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))  # calling api key fo
     
 # Create embedding from string using local model with sentence transformer, returns embedding
 def get_embedding(text: str):
-    model = SentenceTransformer(
+    """model = SentenceTransformer(
         "all-MiniLM-L6-v2"
     )
     
     response = model.encode(
         text
-    )
+    )"""
+    
+    response = embedding_generator.generate_embedding(text)
     
     return response
 

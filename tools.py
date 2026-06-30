@@ -4,6 +4,8 @@ from google import genai    # importing genai from google for callin LLM
 from dotenv import load_dotenv  # importing dotenv for loading API key
 from rag import get_relevant_chunks # for fetching relevant chunks using RAG
 
+from configuration import llm
+
 import os
 
 load_dotenv()
@@ -59,48 +61,13 @@ def retrieve_documents(state):
     return state
 
 # RAG for retriving relevant chunks from knowledge_base to state
-def placement_support(state):
+def placement_support(prompt):
     """LLM response by understanding user goal, skills, missing skills and suggests lesson plan
 
     Returns:
         str: response from LLM
     """
-    context = state
-    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
     
-    response = client.models.generate_content(
-        model="gemini-2.5-flash", 
-        contents=f"""
-        You're a placement mentor. You provide placement support 
-        
-        context: {context}
-        """
-    )
+    response = llm.generate(prompt)
     
-    return response.text
-
-"""
-#LLM function calling    
-def tool_router():
-    LLM funtion calling
-
-    Returns:
-        None: LLM Chooses function to respond
-    
-    tools = [
-        remember_user,
-        recall_user, 
-        placement_support
-    ]
-    
-    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-    
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=f
-        Choose from the following tools
-        
-        tools: {tools}
-        
-    )
-"""
+    return response

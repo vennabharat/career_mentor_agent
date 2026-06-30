@@ -1,5 +1,6 @@
 from state import state     # importing state 
 from memory import memory   # importing memory
+from prompt import prompt_builder   # importing prompt builder for generating prompt using state
 
 from tools import (
     recall_user, 
@@ -32,7 +33,11 @@ def run_agent(question):
     state = find_missing_skills(state)
 
     state = retrieve_documents(state)
+    
+    prompt = prompt_builder(state)
 
-    answer = placement_support(state)
+    answer = placement_support(prompt)
+    
+    print(answer)
 
     return answer

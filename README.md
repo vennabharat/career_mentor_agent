@@ -1,87 +1,117 @@
 # Career Mentor Agent
 
-An AI-powered Career Mentor Agent built using **FastAPI**, **Google Gemini**, **ChromaDB**, and **Retrieval-Augmented Generation (RAG)**. The agent maintains user memory, retrieves relevant information from a knowledge base, analyzes missing skills, and generates personalized career guidance.
+An AI-powered Career Mentor Agent that provides personalized AI engineering career guidance using Retrieval-Augmented Generation (RAG), user memory, state management, configurable LLM providers, and pluggable embedding models.
 
-This project was built as part of my **AI Engineer Learning Journey** to understand how modern AI agents are designed by combining memory, state management, tools, vector databases, embeddings, and Large Language Models.
+This project is part of my AI Engineer learning journey, where the goal is to understand how production-style AI applications are designed using clean software engineering principles rather than relying on a single LLM call.
 
 ---
 
-# Project Objective
+# Features
 
-Build a stateful AI agent capable of:
-
-* Remembering user information
-* Maintaining state throughout execution
-* Retrieving relevant knowledge using RAG
-* Identifying missing skills based on career goals
-* Generating personalized learning recommendations using Gemini
+- Modular AI Agent architecture
+- State-driven execution pipeline
+- User memory management
+- Retrieval-Augmented Generation (RAG)
+- ChromaDB vector database
+- Configurable LLM providers
+- Configurable embedding providers
+- Factory Pattern implementation
+- Loose coupling between components
+- PDF, TXT and JSON knowledge ingestion
+- Easily extendable architecture
 
 ---
 
 # Tech Stack
 
-* Python
-* FastAPI
-* Google Gemini 2.5 Flash
-* Gemini Embedding Model
-* ChromaDB
-* PyPDF
-* python-dotenv
+- Python
+- FastAPI
+- Google Gemini
+- Hugging Face
+- Sentence Transformers
+- ChromaDB
+- python-dotenv
+- PyPDF
+- JSON
 
 ---
 
-# Project Architecture
+# Architecture
 
-```text
-                  User
-                    │
-                    ▼
-             FastAPI Endpoint
-                    │
-                    ▼
-               Agent Runner
-                    │
-                    ▼
-              Initialize State
-                    │
-                    ▼
-             Recall User Memory
-                    │
-                    ▼
-          Identify Missing Skills
-                    │
-                    ▼
-      Retrieve Relevant Documents
-           (ChromaDB + RAG)
-                    │
-                    ▼
-          Generate Gemini Response
-                    │
-                    ▼
-             Final Career Advice
+```
+                     User
+                       │
+                       ▼
+                 FastAPI Endpoint
+                       │
+                       ▼
+                  Agent Runner
+                       │
+         ┌─────────────┴─────────────┐
+         ▼                           ▼
+  Initialize State             Load Memory
+         │                           │
+         └─────────────┬─────────────┘
+                       ▼
+              Recall User Details
+                       │
+                       ▼
+            Missing Skill Analysis
+                       │
+                       ▼
+          Retrieve Relevant Documents
+             (ChromaDB + Embeddings)
+                       │
+                       ▼
+                Prompt Builder
+                       │
+                       ▼
+               LLM Provider Factory
+                       │
+                       ▼
+              Gemini / HuggingFace
+                       │
+                       ▼
+                Personalized Answer
 ```
 
 ---
 
 # Project Structure
 
-```text
+```
 career_mentor_agent/
 │
-├── app.py                  # FastAPI application
-├── agent.py                # Agent orchestration
-├── tools.py                # Agent tools
-├── rag.py                  # ChromaDB operations
-├── embeddings.py           # Gemini embeddings
-├── documents_loader.py     # Reads knowledge base files
-├── file_loader.py          # TXT, PDF and JSON loaders
-├── memory.py               # User memory
-├── state.py                # Agent state
+├── app.py
+├── agent.py
+├── configuration.py
+├── prompt.py
+├── tools.py
+├── state.py
+├── memory.py
 │
-├── knowledge_base/         # Documents used for RAG
-├── chromaDB/               # Persistent vector database
-├── .env.example            # API key
-├── .gitignore              # Used for keeping API key locally
+├── llm/
+│   ├── base.py
+│   ├── factory.py
+│   ├── gemini_provider.py
+│   └── huggingface_provider.py
+│
+├── embedding/
+│   ├── base.py
+│   ├── factory.py
+│   ├── gemini_embedding.py
+│   └── sentence_transformer_embedding.py
+│
+├── rag.py
+├── embeddings.py
+├── documents_loader.py
+├── file_loader.py
+│
+├── knowledge_base/
+│
+├── chromaDB/
+│
+├── requirements.txt
 └── README.md
 ```
 
@@ -89,175 +119,237 @@ career_mentor_agent/
 
 # Agent Workflow
 
-### Step 1 — Receive User Question
-
-The user sends a question through the FastAPI endpoint.
+## 1. User submits a question
 
 Example:
 
-```text
-What skills should I learn to become an AI Engineer?
+```
+How can I become an AI Engineer?
 ```
 
 ---
 
-### Step 2 — Initialize State
+## 2. Initialize Agent State
 
-A fresh state object is created for the current request.
+A fresh state object is created.
 
-The state stores information such as:
+The state contains:
 
-* User memory
-* Career goal
-* Current skills
-* Missing skills
-* Retrieved documents
-* User question
-
----
-
-### Step 3 — Recall User Memory
-
-The agent retrieves previously stored information including:
-
-* Name
-* Career Goal
-* Existing Skills
+- Memory
+- Career goal
+- Existing skills
+- Missing skills
+- Retrieved documents
+- User question
+- Learning plan
 
 ---
 
-### Step 4 — Skill Gap Analysis
+## 3. Recall User Memory
 
-The agent compares the user's existing skills with a predefined list of required AI Engineering skills and identifies missing skills.
+The agent loads previously stored information such as:
 
-Example:
+- Goal
+- Skills
+- User profile
+
+---
+
+## 4. Skill Gap Analysis
+
+The current skills are compared against the required AI Engineering skill set.
+
+Example
 
 Current Skills
 
-* Python
-* SQL
+```
+Python
+SQL
+```
 
 Missing Skills
 
-* FastAPI
-* ChromaDB
-* RAG
-* Docker
-* Memory Management
+```
+FastAPI
+Docker
+RAG
+ChromaDB
+Memory
+```
 
 ---
 
-### Step 5 — Retrieval-Augmented Generation (RAG)
+## 5. Retrieve Relevant Knowledge
 
-The user's question is converted into an embedding using Gemini Embeddings.
+The user's question is converted into an embedding.
 
-The embedding is searched against the ChromaDB vector database.
+Depending on the configuration, the embedding model can be:
 
-The most relevant documents are retrieved and added to the agent's state.
+- Sentence Transformers
+- Gemini Embeddings
 
----
-
-### Step 6 — Generate Final Response
-
-The agent sends the following context to Gemini:
-
-* User Goal
-* Current Skills
-* Missing Skills
-* Retrieved Knowledge
-
-Gemini generates a personalized response using both the retrieved knowledge and the user's context.
+The generated embedding is searched against ChromaDB to retrieve the most relevant knowledge.
 
 ---
 
-# Features
+## 6. Prompt Construction
 
-* User memory management
-* Shared agent state
-* Skill gap analysis
-* Document ingestion
-* PDF, TXT and JSON support
-* Gemini embeddings
-* Persistent ChromaDB vector database
-* Retrieval-Augmented Generation (RAG)
-* Personalized AI career guidance
+The prompt builder combines
+
+- User goal
+- Skills
+- Missing skills
+- Retrieved documents
+- User question
+
+into a single prompt sent to the LLM.
+
+---
+
+## 7. Response Generation
+
+The prompt is passed to the configured LLM provider.
+
+Supported providers include:
+
+- Gemini
+- Hugging Face
+
+Switching providers requires only a configuration change.
+
+---
+
+# Factory Pattern
+
+The project uses the Factory Pattern to decouple the application from specific AI providers.
+
+## LLM Factory
+
+```
+get_llm("gemini")
+
+get_llm("huggingface")
+```
+
+Both providers implement a common interface.
+
+```
+BaseLLM
+    │
+    ├── GeminiLLM
+    └── HuggingFaceLLM
+```
+
+---
+
+## Embedding Factory
+
+```
+get_embedding("sentence-transformers")
+
+get_embedding("gemini")
+```
+
+Both embedding models expose the same interface.
+
+```
+BaseEmbedding
+      │
+      ├── GeminiEmbedding
+      └── SentenceTransformerEmbedding
+```
+
+This allows changing embedding providers without modifying the RAG pipeline.
+
+---
+
+# Software Engineering Concepts Used
+
+- Factory Pattern
+- Dependency Inversion
+- Interface-based design
+- Loose Coupling
+- High Cohesion
+- Modular Architecture
+- Configuration-driven provider selection
+
+---
+
+# Configuration
+
+LLM provider
+
+```python
+llm = get_llm("gemini")
+```
+
+Embedding provider
+
+```python
+embedding_generator = get_embedding("sentence-transformers")
+```
+
+Changing providers requires modifying only the configuration file.
 
 ---
 
 # Knowledge Base
 
-The project supports multiple document formats:
+The agent retrieves information from multiple document formats.
 
-* TXT
-* PDF
-* JSON
+Supported formats
 
-Documents are converted into embeddings and stored in ChromaDB for semantic search.
+- PDF
+- TXT
+- JSON
 
----
-
-# Concepts Learned
-
-This project combines several AI Engineering concepts into a single application:
-
-* FastAPI
-* State Management
-* Memory
-* AI Agent Architecture
-* Tool-Based Design
-* Embeddings
-* Vector Databases
-* ChromaDB
-* Semantic Search
-* Retrieval-Augmented Generation (RAG)
-* Prompt Engineering
-* Google Gemini API
-
----
-
-# Challenges Solved
-
-During development, the following engineering challenges were identified and resolved:
-
-* Circular imports between modules
-* Persistent ChromaDB collection management
-* Embedding format conversion for ChromaDB
-* Unique document ID generation
-* State propagation across multiple tools
-* Separation of tools and utility functions
-
-These improvements resulted in a cleaner and more maintainable architecture.
+Documents are embedded and stored in ChromaDB for semantic retrieval.
 
 ---
 
 # Future Improvements
 
-* LLM Function Calling
-* Dynamic tool selection
-* Tool chaining
-* Conversation history
-* Long-term memory
-* Multi-user support
-* Planner-based agent workflow
-* Docker deployment
-* Cloud deployment
-* Authentication and user profiles
+- Long-term conversational memory
+- Persistent user profiles
+- LangGraph integration
+- Streaming responses
+- Multi-agent architecture
+- Tool calling
+- Conversation history
+- User authentication
+- REST API deployment
+- Docker support
+- Cloud deployment
+- Observability and logging
 
 ---
 
-# Sample Questions
+# Learning Outcomes
 
-* What skills am I missing to become an AI Engineer?
-* Create a learning roadmap for me.
-* Explain Retrieval-Augmented Generation (RAG).
-* How should I prepare for AI Engineer interviews?
-* What is ChromaDB?
-* Recommend my next learning topics.
+This project demonstrates practical implementation of:
+
+- AI Agents
+- Retrieval-Augmented Generation (RAG)
+- Vector Databases
+- Embedding Models
+- LLM Provider Abstraction
+- Factory Design Pattern
+- State Management
+- Memory Management
+- Semantic Search
+- Clean Software Architecture
 
 ---
 
-# Learning Outcome
+# Author
 
-This project helped me understand how an AI agent combines multiple AI engineering components into a complete workflow. Instead of calling an LLM directly, the agent retrieves user information, maintains state, searches a vector database for relevant context, and then generates grounded responses using Gemini.
+**Bharat Venna**
 
-This project represents my transition from building individual AI components to designing an integrated AI agent architecture.
+AI Engineer | Building AI Agents, RAG Systems, and Production-ready LLM Applications.
+
+GitHub:
+https://github.com/vennabharat
+
+LinkedIn:
+https://www.linkedin.com/vennabharat/
